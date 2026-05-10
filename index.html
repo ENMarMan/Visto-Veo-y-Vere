@@ -133,9 +133,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 /* OVERLAYS */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:400;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
 .overlay.open{display:flex;}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:20px 20px 0 0;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 20px 50px;animation:slideUp .22s ease;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:20px 20px 0 0;width:100%;max-width:620px;height:auto;max-height:88vh;display:flex;flex-direction:column;animation:slideUp .22s ease;}
+.modal-inner{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;flex:1;padding:0 20px 50px;}
+.modal-handle{width:36px;height:4px;background:var(--border2);border-radius:2px;margin:14px auto 18px;flex-shrink:0;}
 @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-handle{width:36px;height:4px;background:var(--border2);border-radius:2px;margin:14px auto 18px;}
 .modal-title{font-family:var(--fh);font-size:.93rem;font-weight:700;color:var(--accent);margin-bottom:20px;letter-spacing:1px;}
 
 /* FORM */
@@ -292,6 +293,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay" id="formOverlay" onclick="overlayClick(event,'formOverlay')">
   <div class="modal">
     <div class="modal-handle"></div>
+    <div class="modal-inner">
     <div class="modal-title" id="formTitle">Nueva entrada</div>
     <div class="fg"><label class="fl">Título *</label><input class="fi" id="f-titulo" placeholder="Ej: Steins;Gate"></div>
     <div class="form-row">
@@ -330,6 +332,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <button class="btn btn-secondary" onclick="closeOverlay('formOverlay')">Cancelar</button>
       <button class="btn btn-primary" onclick="saveEntry()">Guardar en Drive</button>
     </div>
+    </div>
   </div>
 </div>
 
@@ -337,11 +340,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay" id="detailOverlay" onclick="overlayClick(event,'detailOverlay')">
   <div class="modal">
     <div class="modal-handle"></div>
+    <div class="modal-inner">
     <div id="detailContent"></div>
     <div class="btn-row">
       <button class="btn btn-danger" id="detDeleteBtn">🗑</button>
       <button class="btn btn-secondary" onclick="closeOverlay('detailOverlay')">Cerrar</button>
       <button class="btn btn-secondary" id="detEditBtn">✏ Editar</button>
+    </div>
     </div>
   </div>
 </div>
@@ -350,6 +355,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay" id="importOverlay" onclick="overlayClick(event,'importOverlay')">
   <div class="modal">
     <div class="modal-handle"></div>
+    <div class="modal-inner">
     <div class="modal-title">Importar desde Excel</div>
     <div class="import-zone" onclick="document.getElementById('xlsxFile').click()">
       <div class="iz-icon">📂</div>
@@ -359,6 +365,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <input type="file" id="xlsxFile" accept=".xlsx,.xls" style="display:none" onchange="handleImport(event)">
     <div id="importMsg" style="font-size:.82rem;color:var(--muted2);text-align:center;min-height:24px;"></div>
     <div class="btn-row"><button class="btn btn-secondary" onclick="closeOverlay('importOverlay')">Cerrar</button></div>
+    </div>
   </div>
 </div>
 
