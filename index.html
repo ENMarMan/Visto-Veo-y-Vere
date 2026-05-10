@@ -36,9 +36,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 #loadingMsg{font-size:.78rem;color:var(--muted2);}
 
 /* SCREENS */
-.screen{display:none;min-height:100vh;position:relative;z-index:1;}
-.screen.active{display:block;}
-#screen-app.active{display:flex;flex-direction:column;}
+.screen{display:none !important;min-height:100vh;position:relative;z-index:1;}
+.screen.active{display:block !important;}
+#screen-app.active{display:flex !important;flex-direction:column;}
 
 /* LOGIN */
 #screen-login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 24px;text-align:center;}
@@ -395,8 +395,16 @@ const hideLoad=()=>{$('loadingScreen').style.display='none';};
 
 /* ── SCREENS ────────────────────────────────── */
 function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  $(id).classList.add('active');
+  document.querySelectorAll(".screen").forEach(s=>{
+    s.classList.remove("active");
+    s.style.display="none";
+  });
+  const target=$(id);
+  target.classList.add("active");
+  target.style.display=id==="screen-app"?"flex":"block";
+  window.scrollTo(0,0);
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
 }
 
 /* ── GOOGLE AUTH ────────────────────────────── */
